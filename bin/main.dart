@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:comrade_bot/api_manager.dart';
 import 'package:comrade_bot/api_quests.dart';
+import 'package:comrade_bot/functions/ping.dart';
 import 'package:comrade_bot/slack_api.dart';
 import 'package:comrade_bot/slack_event_types.dart';
 
@@ -33,13 +34,8 @@ onMessage(message) {
   String text = message['text'];
   // user == 'UA05YTMDZ'
   if (user == 'UD3JY1QQ4' || user == 'UD55KN8MU') { 
-    if (text == '!ping') {
-      sendMessage(
-        "pong",
-        channel,
-        icon_emoji: ':table_tennis_paddle_and_ball:',
-        username: 'Pongiste',
-      );
+    if (text.contains('!ping')) {
+      ping(text, channel);
     }
   }
 }
