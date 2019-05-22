@@ -4,11 +4,23 @@ usagePing() {
   return "Utilisation :\n`!ping {username}`\n`!ping`";
 }
 
-ping(text, channel) {
+ping(String text, String channel) {
   sendMessage(
-    "pong",
+    pingMachine(text),
     channel,
     icon_emoji: ':table_tennis_paddle_and_ball:',
-    username: 'Pongiste',
+    username: 'Comrade pongiste',
   );
+}
+
+String pingMachine(String text) {
+  List<String> splittedText = text.split(' ');
+  if (splittedText.length > 2) {
+    return usagePing();
+  }
+  final regex = RegExp(r'^[a-zA-Z]+$');
+  if (splittedText.length == 2 && regex.hasMatch(splittedText[1])) {
+    return "pong <@${splittedText[1]}>";
+  }
+  return "pong";
 }

@@ -48,7 +48,6 @@ slackSocketError(error) {
 
 slackListener(receiveData) {
   Map dataInfos = jsonDecode(receiveData);
-  print(dataInfos['type']);
   functionWrapper.forEach((type, function) {
     if (dataInfos['type'] == eventTypesString[type.index]) {
       function(jsonDecode(receiveData));
