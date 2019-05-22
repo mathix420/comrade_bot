@@ -9,6 +9,3 @@ environment:
 
 dependencies:
   http:
-
-dev_dependencies:
-  pedantic: ^1.0.0
