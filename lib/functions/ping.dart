@@ -8,7 +8,8 @@ ping(String text, String channel) {
   sendMessage(
     pingMachine(text),
     channel,
-    icon_emoji: ':table_tennis_paddle_and_ball:',
+    icon_url: 'https://i.ibb.co/61ZtHqL/urssping.png',
+    // icon_emoji: ':table_tennis_paddle_and_ball:',
     username: 'Comrade pongiste',
   );
 }

@@ -10,6 +10,8 @@ import 'package:comrade_bot/slack_event_types.dart';
 
 String API_TOKEN_42;
 
+final List<String> adminUsers = ['UD3JY1QQ4', 'UD55KN8MU'];
+
 main() {
   Directory('keys').createSync();
   File('keys/token_42.key').createSync();
@@ -30,8 +32,16 @@ onMessage(message) {
   String channel = message['channel'];
   String user = message['user'];
   String text = message['text'];
-  // user == 'UA05YTMDZ'
-  if (user == 'UD3JY1QQ4' || user == 'UD55KN8MU') {
+  bool isAdminDev = Platform.environment['dev'] == 'true';
+  isAdminDev = isAdminDev && adminUsers.contains(user);
+  // Only for local testing
+  if (isAdminDev) {
+    if (text.startsWith('!clim')) {
+      clim(text, channel);
+    }
+  }
+  // Deployed version and access for testing
+  if (channel == 'C8Y2AQR6D' || isAdminDev) {
     if (text.startsWith('!ping')) {
       print('in ping fct');
       ping(text, channel);
@@ -41,8 +51,6 @@ onMessage(message) {
     } else if (text.startsWith('!parrot')) {
       print('in parrot fct');
       parrot(text, channel);
-    } else if (text.startsWith('!clim')) {
-      clim(text, channel);
     }
   }
 }

@@ -8,6 +8,4 @@ clim(String text, String channel) {
         'https://pm1.narvii.com/6778/3758ad21f6fdbf11bcb3aac5ea181d4132682a74v2_128.jpg',
     username: 'Comrade Worker',
   );
-  // TODO: get PUBLIC, PRIVATE and SLACK_TOKEN from SYS variables
-  // TODO: mkdir keys dir when building
 }

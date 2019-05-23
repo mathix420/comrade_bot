@@ -11,4 +11,5 @@ build/
 doc/api/
 
 #API keys
+.vscode/
 keys/
