@@ -22,7 +22,7 @@ usageTravail(String channel) {
 
 travail(String text, String channel, String apiToken) {
   List<String> splittedText = text.split(' ');
-  final regex = RegExp(r'^[a-zA-Z]+$');
+  final regex = RegExp(r'^[a-zA-Z-]+$');
   if (splittedText.length != 2 || !regex.hasMatch(splittedText[1])) {
     usageTravail(channel);
     return;

@@ -19,7 +19,7 @@ String pingMachine(String text) {
   if (splittedText.length > 2) {
     return usagePing();
   }
-  final regex = RegExp(r'^[a-zA-Z]+$');
+  final regex = RegExp(r'^[a-zA-Z-]+$');
   if (splittedText.length == 2 && regex.hasMatch(splittedText[1])) {
     return "pong <@${splittedText[1]}>";
   }
