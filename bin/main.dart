@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'dart:convert';
+import 'package:comrade_bot/functions/reset.dart';
 import 'package:comrade_bot/slack_api.dart';
 import 'package:comrade_bot/api_manager.dart';
 import 'package:comrade_bot/functions/clim.dart';
@@ -44,6 +45,8 @@ onMessage(message) {
       clim(text, channel);
     } else if (text == '!bonjour') {
       bonjour(channel);
+    } else if (text == '!reset') {
+      reset(channel);
     }
   }
   // Deployed version and access for testing
