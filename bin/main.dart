@@ -1,12 +1,13 @@
-import 'dart:convert';
 import 'dart:io';
+import 'dart:convert';
+import 'package:comrade_bot/slack_api.dart';
 import 'package:comrade_bot/api_manager.dart';
 import 'package:comrade_bot/functions/clim.dart';
-import 'package:comrade_bot/functions/parrot.dart';
 import 'package:comrade_bot/functions/ping.dart';
+import 'package:comrade_bot/functions/parrot.dart';
 import 'package:comrade_bot/functions/travail.dart';
-import 'package:comrade_bot/slack_api.dart';
 import 'package:comrade_bot/slack_event_types.dart';
+import 'package:comrade_bot/functions/bonjour.dart';
 
 String API_TOKEN_42;
 
@@ -32,20 +33,22 @@ onMessage(message) {
   String channel = message['channel'];
   String user = message['user'];
   String text = message['text'];
-  bool isAdminDev = Platform.environment['dev'] == 'true';
-  isAdminDev = isAdminDev && adminUsers.contains(user);
+  bool isDev = Platform.environment['dev'] == 'true';
+  bool isAdmin = adminUsers.contains(user);
   if (text == null) {
     return;
   }
   // Only for local testing
-  if (isAdminDev) {
+  if (isDev && isAdmin) {
     if (text.startsWith('!clim')) {
       clim(text, channel);
+    } else if (text == '!bonjour') {
+      bonjour(channel);
     }
   }
   // Deployed version and access for testing
-  if ((channel == 'C8Y2AQR6D' && !isAdminDev) ||
-      (isAdminDev && channel != 'C8Y2AQR6D')) {
+  if ((channel == 'C8Y2AQR6D' && !isDev) ||
+      (isDev && isAdmin && channel != 'C8Y2AQR6D')) {
     if (text.startsWith('!ping')) {
       print('in ping fct');
       ping(text, channel);
