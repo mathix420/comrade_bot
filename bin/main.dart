@@ -34,6 +34,9 @@ onMessage(message) {
   String text = message['text'];
   bool isAdminDev = Platform.environment['dev'] == 'true';
   isAdminDev = isAdminDev && adminUsers.contains(user);
+  if (text == null) {
+    return;
+  }
   // Only for local testing
   if (isAdminDev) {
     if (text.startsWith('!clim')) {
