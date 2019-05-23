@@ -11,6 +11,8 @@ import 'package:comrade_bot/slack_event_types.dart';
 String API_TOKEN_42;
 
 main() {
+  Directory('keys').createSync();
+  File('keys/token_42.key').createSync();
   getApiToken().then((value) {
     API_TOKEN_42 = jsonDecode(value)['access_token'];
     getSlackToken();
@@ -19,10 +21,8 @@ main() {
 }
 
 botStartup() {
-  Directory('keys').create().then((dir) {
-    startingRtm({
-      eventTypes.message: onMessage,
-    });
+  startingRtm({
+    eventTypes.message: onMessage,
   });
 }
 
