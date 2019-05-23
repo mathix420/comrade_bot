@@ -5,7 +5,6 @@ import 'package:comrade_bot/functions/clim.dart';
 import 'package:comrade_bot/functions/parrot.dart';
 import 'package:comrade_bot/functions/ping.dart';
 import 'package:comrade_bot/functions/travail.dart';
-import 'package:comrade_bot/heroku_binder.dart';
 import 'package:comrade_bot/slack_api.dart';
 import 'package:comrade_bot/slack_event_types.dart';
 
@@ -14,7 +13,6 @@ String API_TOKEN_42;
 main() {
   Directory('keys').createSync();
   File('keys/token_42.key').createSync();
-  portBinder();
   getApiToken().then((value) {
     API_TOKEN_42 = jsonDecode(value)['access_token'];
     getSlackToken();
