@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:comrade_bot/api_manager.dart';
 import 'package:comrade_bot/functions/clim.dart';
 import 'package:comrade_bot/functions/parrot.dart';
@@ -18,8 +19,10 @@ main() {
 }
 
 botStartup() {
-  startingRtm({
-    eventTypes.message: onMessage,
+  Directory('keys').create().then((dir) {
+    startingRtm({
+      eventTypes.message: onMessage,
+    });
   });
 }
 
