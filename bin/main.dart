@@ -41,7 +41,8 @@ onMessage(message) {
     }
   }
   // Deployed version and access for testing
-  if (channel == 'C8Y2AQR6D' || isAdminDev) {
+  if ((channel == 'C8Y2AQR6D' && !isAdminDev) ||
+      (isAdminDev && channel != 'C8Y2AQR6D')) {
     if (text.startsWith('!ping')) {
       print('in ping fct');
       ping(text, channel);
