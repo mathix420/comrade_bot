@@ -12,9 +12,8 @@ String API_TOKEN_42;
 main() {
   getApiToken().then((value) {
     API_TOKEN_42 = jsonDecode(value)['access_token'];
-    getSlackToken().then((noData) {
-      botStartup();
-    });
+    getSlackToken();
+    botStartup();
   });
 }
 
@@ -33,16 +32,13 @@ onMessage(message) {
     if (text.startsWith('!ping')) {
       print('in ping fct');
       ping(text, channel);
-    }
-    else if (text.startsWith('!travail')) {
+    } else if (text.startsWith('!travail')) {
       print('in travail fct');
       travail(text, channel, API_TOKEN_42);
-    }
-    else if (text.startsWith('!parrot')) {
+    } else if (text.startsWith('!parrot')) {
       print('in parrot fct');
       parrot(text, channel);
-    }
-    else if (text.startsWith('!clim')) {
+    } else if (text.startsWith('!clim')) {
       clim(text, channel);
     }
   }

@@ -9,11 +9,9 @@ String API_TOKEN;
 
 Map<eventTypes, Function> functionWrapper = {};
 
-Future getSlackToken() async {
-  return await File('keys/token_slack.key').readAsString().then((token) {
-    API_TOKEN = token.trim();
-    return;
-  });
+getSlackToken() {
+  Map<String, String> envVars = Platform.environment;
+  API_TOKEN = envVars['SLACK_PRIVATE'];
 }
 
 startingRtm([Map<eventTypes, Function> functions]) async {
