@@ -5,16 +5,27 @@ import 'package:http/http.dart' as http;
 String PUBLIC;
 String PRIVATE;
 
+final int timeOut = 7100;
+
 getKeys() {
   Map<String, String> envVars = Platform.environment;
   PUBLIC = envVars['INTRA_PUBLIC'];
   PRIVATE = envVars['INTRA_PRIVATE'];
 }
 
+tokenChecker(Function callback) async {
+  await Future.delayed(Duration(seconds: timeOut)).then((data) {
+    getNewToken().then((String response) {
+      callback(response);
+      tokenChecker(callback);
+    });
+  });
+}
+
 Future<String> getApiToken() async {
   getKeys();
   return await File('keys/token_42.key').lastModified().then((time) async {
-    if (DateTime.now().difference(time).inSeconds >= 7100) {
+    if (DateTime.now().difference(time).inSeconds >= timeOut) {
       return getNewToken();
     }
     return await File('keys/token_42.key')

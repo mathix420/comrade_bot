@@ -19,10 +19,15 @@ main() {
   Directory('keys').createSync();
   File('keys/token_42.key').createSync();
   getApiToken().then((value) {
-    API_TOKEN_42 = jsonDecode(value)['access_token'];
+    setToken(value);
+    tokenChecker(setToken);
     getSlackToken();
     botStartup();
   });
+}
+
+setToken(responseData) {
+  API_TOKEN_42 = jsonDecode(responseData)['access_token'];
 }
 
 botStartup() {
