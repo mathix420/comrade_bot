@@ -54,13 +54,10 @@ onMessage(message) {
   if ((channel == 'C8Y2AQR6D' && !isDev) ||
       (isDev && isAdmin && channel != 'C8Y2AQR6D')) {
     if (text.startsWith('!ping')) {
-      print('in ping fct');
       ping(text, channel);
     } else if (text.startsWith('!travail')) {
-      print('in travail fct');
-      travail(text, channel, API_TOKEN_42);
+      travail(text, channel, API_TOKEN_42, getUserFormUid(user));
     } else if (text.startsWith('!parrot')) {
-      print('in parrot fct');
       parrot(text, channel);
     } else if (text == '!comrade') {
       comradeManual(channel);

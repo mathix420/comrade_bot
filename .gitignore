@@ -13,3 +13,6 @@ doc/api/
 #API keys
 .vscode/
 keys/
+
+#logs
+logs/

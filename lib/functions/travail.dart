@@ -20,26 +20,32 @@ usageTravail(String channel) {
   );
 }
 
-travail(String text, String channel, String apiToken) {
+travail(String text, String channel, String apiToken, userRequest) {
   List<String> splittedText = text.split(' ');
   final regex = RegExp(r'^[a-zA-Z-]+$');
+  String mainMessage = "Ravi de te revoir comrade !";
   if (splittedText.length != 2 || !regex.hasMatch(splittedText[1])) {
     usageTravail(channel);
     return;
   }
-  getNextQuest(splittedText[1], apiToken).then((message) {
-    sendMessage(
-      "Ravi de te revoir comrade !",
-      channel,
-      jsonAttachement: [
-        {
-          "text": message,
-          "color": "#BC0000",
-          "attachment_type": "default",
-        }
-      ],
-      icon_url: icon,
-      username: 'Comrade 42',
-    );
+  getNextQuest(splittedText[1], apiToken).then((result) {
+    userRequest.then((name) {
+      if (result['ok'] && name != splittedText[1]) {
+        mainMessage = "Devrai-je prévenir comrade <@${splittedText[1]}>?";
+      }
+      sendMessage(
+        mainMessage,
+        channel,
+        jsonAttachement: [
+          {
+            "text": result['message'],
+            "color": "#BC0000",
+            "attachment_type": "default",
+          }
+        ],
+        icon_url: icon,
+        username: 'Comrade 42',
+      );
+    });
   });
 }

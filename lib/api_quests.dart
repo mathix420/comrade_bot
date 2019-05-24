@@ -1,3 +1,4 @@
+import 'package:comrade_bot/log_manager.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -7,12 +8,20 @@ Future<dynamic> getNextQuest(username, token) async {
   Map<String, String> header = {"Authorization": "Bearer $token"};
   return await http.get(url, headers: header).then((recievedData) {
     if (recievedData.statusCode != 200) {
-      return 'Je ne trouve pas *$username* dans les registres !';
+      dumpToLog(recievedData.body, 'not_found_user.log');
+      return {
+        'ok': false,
+        'message': 'Je ne trouve pas *$username* dans les registres !'
+      };
     }
     List<dynamic> decodedData = jsonDecode(recievedData.body);
     List<Map> sortedData = [];
     if (decodedData.isEmpty) {
-      return 'Une erreur c\'est produite !\nTout nos agents sont sur le coup !';
+      return {
+        'ok': false,
+        'message':
+            'Une erreur c\'est produite !\nTout nos agents sont sur le coup !'
+      };
     }
     decodedData.forEach((quest) {
       if (questOrder.contains(quest['quest_id'])) {
@@ -34,7 +43,11 @@ Future<dynamic> getNextQuest(username, token) async {
       });
     }
     if (sortedData.last['validated_at'] != null) {
-      return "Bon travail comrade, tu as validé toutes tes quests! :party-frog:";
+      return {
+        'ok': true,
+        'message':
+            "Bon travail comrade, tu as validé toutes tes quests! :party-frog:"
+      };
     }
     Map nextQuest = sortedData.firstWhere((item) {
       return item['validated_at'] == null;
@@ -45,11 +58,18 @@ Future<dynamic> getNextQuest(username, token) async {
       var end = DateTime.parse(nextQuest['end_at']);
       var time = end.difference(DateTime.now()).inDays;
 
-      return """Encore *$todo quest${todo > 1 ? 's' : ''}* à valider...
+      return {
+        'ok': true,
+        'message': """Encore *$todo quest${todo > 1 ? 's' : ''}* à valider...
 Prochaine étape : _${nextQuest['quest']['name']}_\nVous avez *$time jour${time > 1 ? 's' : ''}* pour atteindre cette étape
-Davaï comrade!""";
+Davaï comrade!"""
+      };
     }
-    return """Il te reste encore *$todo quest${todo > 1 ? 's' : ''}* à valider, mais tu as passé tous les :blackhole: !
-Prochaine étape : _${nextQuest['quest']['name']}_\nBonne chance comrade!""";
+    return {
+      'ok': true,
+      'message':
+          """Il te reste encore *$todo quest${todo > 1 ? 's' : ''}* à valider, mais tu as passé tous les :blackhole: !
+Prochaine étape : _${nextQuest['quest']['name']}_\nBonne chance comrade!"""
+    };
   });
 }

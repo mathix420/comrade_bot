@@ -69,7 +69,7 @@ sendMessage(String message, String channel,
     bool unfurl_links = false,
     bool unfurl_media = true,
     String username}) {
-  String requestUrl = 'https://slack.com/api/chat.postMessage?token=$API_TOKEN';
+  final requestUrl = 'https://slack.com/api/chat.postMessage?token=$API_TOKEN';
   dynamic requestBody = {
     'text': message,
     'channel': channel,
@@ -103,8 +103,19 @@ sendMessage(String message, String channel,
   if (parse != null) {
     requestBody['parse'] = parse;
   }
-  print(jsonEncode(requestBody));
   http.post(requestUrl, body: requestBody).then((data) {
-    print(data.body);
+    // print(data.body);
+  });
+}
+
+// GET Username from UID
+Future<dynamic> getUserFormUid(String uid) async {
+  final url = 'https://slack.com/api/users.info?token=$API_TOKEN&user=$uid';
+  return await http.get(url).then((response) {
+    if (response != null && response.body != null) {
+      return jsonDecode(response.body)['user']['name'];
+    } else {
+      return null;
+    }
   });
 }

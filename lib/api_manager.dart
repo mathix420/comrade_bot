@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:comrade_bot/log_manager.dart';
 import 'package:http/http.dart' as http;
 
 String PUBLIC;
@@ -24,7 +25,7 @@ Future<String> getApiToken() async {
       }
       return getNewToken();
     }).catchError((error) {
-      // TODO: errors in log
+      dumpToLog(error, 'intra_bad_new_token.log');
       print(error);
       return null;
     });
