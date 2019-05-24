@@ -8,6 +8,7 @@ Future<dynamic> getNextQuest(username, token) async {
   Map<String, String> header = {"Authorization": "Bearer $token"};
   return await http.get(url, headers: header).then((recievedData) {
     if (recievedData.statusCode != 200) {
+      print(recievedData.body);
       dumpToLog(recievedData.body, 'not_found_user.log');
       return {
         'ok': false,

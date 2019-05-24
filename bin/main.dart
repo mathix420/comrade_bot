@@ -40,7 +40,7 @@ onMessage(message) {
   if (text == null) {
     return;
   }
-  // Only for local testing
+  // Work in progress
   if (isDev && isAdmin) {
     if (text.startsWith('!clim')) {
       clim(text, channel);
@@ -50,7 +50,7 @@ onMessage(message) {
       reset(channel);
     }
   }
-  // Deployed version and access for testing
+  // Only released features
   if ((channel == 'C8Y2AQR6D' && !isDev) ||
       (isDev && isAdmin && channel != 'C8Y2AQR6D')) {
     if (text.startsWith('!ping')) {
