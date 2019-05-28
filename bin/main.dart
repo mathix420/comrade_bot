@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:convert';
 import 'package:comrade_bot/functions/comrade.dart';
+import 'package:comrade_bot/functions/flutter.dart';
 import 'package:comrade_bot/functions/reset.dart';
 import 'package:comrade_bot/slack_api.dart';
 import 'package:comrade_bot/api_manager.dart';
@@ -66,6 +67,8 @@ onMessage(message) {
       parrot(text, channel);
     } else if (text == '!comrade') {
       comradeManual(channel);
+    } else if (text == '!flutter') {
+      flutter(channel);
     }
   }
 }
