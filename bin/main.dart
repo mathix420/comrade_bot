@@ -52,8 +52,6 @@ onMessage(message) {
       clim(text, channel);
     } else if (text == '!bonjour') {
       bonjour(channel);
-    } else if (text == '!clean') {
-      clean(channel);
     }
   }
   // Only released features
@@ -69,6 +67,8 @@ onMessage(message) {
       comradeManual(channel);
     } else if (text == '!flutter') {
       flutter(channel);
+    } else if (text == '!clean') {
+      clean(channel);
     }
   }
 }
