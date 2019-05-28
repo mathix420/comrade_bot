@@ -5,13 +5,14 @@ comradeManual(String channel) {
   String ping1 = "*Ping un utilisateur de slack :*\n> !ping <username>\n";
   String ping2 = "*Se ping sois-même :*\n> !ping\n";
   String parrot = "*Vidéo random de youtube :*\n> !parrot\n";
-  String flutter = "*Installation de flutter :*\n> !flutter";
+  String flutter = "*Installation de flutter :*\n> !flutter\n";
+  String clean = "*Nettoyage des caches :*\n> !clean";
   sendMessage(
     "Privet comrade, voici le manuel d'utilisation de *Comrade 1.0* :",
     channel,
     jsonAttachement: [
       {
-        "text": travail + ping1 + ping2 + parrot + flutter,
+        "text": travail + ping1 + ping2 + parrot + flutter + clean,
         "color": "#BC0000",
         "attachment_type": "default",
       }

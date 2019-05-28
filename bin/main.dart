@@ -2,7 +2,7 @@ import 'dart:io';
 import 'dart:convert';
 import 'package:comrade_bot/functions/comrade.dart';
 import 'package:comrade_bot/functions/flutter.dart';
-import 'package:comrade_bot/functions/reset.dart';
+import 'package:comrade_bot/functions/clean.dart';
 import 'package:comrade_bot/slack_api.dart';
 import 'package:comrade_bot/api_manager.dart';
 import 'package:comrade_bot/functions/clim.dart';
@@ -52,8 +52,8 @@ onMessage(message) {
       clim(text, channel);
     } else if (text == '!bonjour') {
       bonjour(channel);
-    } else if (text == '!reset') {
-      reset(channel);
+    } else if (text == '!clean') {
+      clean(channel);
     }
   }
   // Only released features
