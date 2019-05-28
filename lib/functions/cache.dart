@@ -1,6 +1,6 @@
 import 'package:comrade_bot/slack_api.dart';
 
-clean(channel) {
+cache(channel) {
   sendMessage(
     '*Be careful:* `rm -r ~/Library/Caches/*; rm ~/.zcompdump*; brew cleanup`',
     channel,

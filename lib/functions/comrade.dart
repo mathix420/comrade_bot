@@ -6,7 +6,7 @@ comradeManual(String channel) {
   String ping2 = "*Se ping sois-même :*\n> !ping\n";
   String parrot = "*Vidéo random de youtube :*\n> !parrot\n";
   String flutter = "*Installation de flutter :*\n> !flutter\n";
-  String clean = "*Nettoyage des caches :*\n> !clean";
+  String clean = "*Nettoyage des caches :*\n> !cache";
   sendMessage(
     "Privet comrade, voici le manuel d'utilisation de *Comrade 1.0* :",
     channel,
