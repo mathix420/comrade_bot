@@ -1,7 +1,7 @@
 import 'package:comrade_bot/slack_api.dart';
 
 usagePing() {
-  return "Utilisation :\n`!ping {username}`\n`!ping`";
+  return "Utilisation :\n`!ping {login 42}`\n`!ping`";
 }
 
 ping(String text, String channel) {

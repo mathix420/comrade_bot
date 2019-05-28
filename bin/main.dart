@@ -53,6 +53,11 @@ onMessage(message) {
     } else if (text == '!bonjour') {
       bonjour(channel);
     }
+    //  else if (text.startsWith('!encode')) {
+
+    // } else if (text.startsWith('!decode')) {
+      
+    // }
   }
   // Only released features
   if ((channel == 'C8Y2AQR6D' && !isDev) ||
