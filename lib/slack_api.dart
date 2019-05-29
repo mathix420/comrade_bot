@@ -53,8 +53,17 @@ slackListener(receiveData) {
   });
 }
 
-// Slack API for sending messages
+addReaction(String emoji, String channel, String timestamp) {
+  final reqUrl = 'https://slack.com/api/reactions.add?token=$API_TOKEN';
+  dynamic requestBody = {
+    'name': emoji,
+    'channel': channel,
+    'timestamp': timestamp
+  };
+  http.post(reqUrl, body: requestBody);
+}
 
+// Slack API for sending messages
 sendMessage(String message, String channel,
     {bool as_user = false,
     dynamic jsonAttachement,
@@ -103,9 +112,7 @@ sendMessage(String message, String channel,
   if (parse != null) {
     requestBody['parse'] = parse;
   }
-  http.post(requestUrl, body: requestBody).then((data) {
-    // print(data.body);
-  });
+  http.post(requestUrl, body: requestBody);
 }
 
 // GET Username from UID

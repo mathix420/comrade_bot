@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'dart:convert';
+import 'package:comrade_bot/channels/random.dart';
 import 'package:comrade_bot/functions/comrade.dart';
 import 'package:comrade_bot/functions/flutter.dart';
 import 'package:comrade_bot/functions/cache.dart';
@@ -43,8 +44,12 @@ onMessage(message) {
   String text = message['text'];
   bool isDev = Platform.environment['dev'] == 'true';
   bool isAdmin = adminUsers.contains(user);
-  if (text == null) {
+  if (text == null || user == null) {
     return;
+  }
+  // Random
+  if (channel == 'C0G07RYJD') {
+    randomManager(channel, message['ts'], user, text, isDev, isAdmin);
   }
   // Work in progress
   if (isDev && isAdmin) {
@@ -53,11 +58,6 @@ onMessage(message) {
     } else if (text == '!bonjour') {
       bonjour(channel);
     }
-    //  else if (text.startsWith('!encode')) {
-
-    // } else if (text.startsWith('!decode')) {
-      
-    // }
   }
   // Only released features
   if ((channel == 'C8Y2AQR6D' && !isDev) ||
