@@ -1,13 +1,12 @@
+import 'dart:convert';
+
 import 'package:comrade_bot/slack_api.dart';
 
 joyjoy(channel, timestamp) {
   addReaction('joyjoy', channel, timestamp);
-  sendMessage(
-    ":joyjoy:",
-    channel,
-    icon_emoji: ':joyjoy:',
-    username: ':joyjoy:',
-  );
+  sendMessage(":joyjoy:", channel, icon_emoji: ':joyjoy:', username: ':joyjoy:')
+      .then(
+          (res) => addReaction('joyjoy', channel, jsonDecode(res.body)['ts']));
 }
 
 randomManager(

@@ -64,7 +64,7 @@ addReaction(String emoji, String channel, String timestamp) {
 }
 
 // Slack API for sending messages
-sendMessage(String message, String channel,
+Future<dynamic> sendMessage(String message, String channel,
     {bool as_user = false,
     dynamic jsonAttachement,
     dynamic jsonBlocks,
@@ -77,7 +77,7 @@ sendMessage(String message, String channel,
     double thread_ts,
     bool unfurl_links = false,
     bool unfurl_media = true,
-    String username}) {
+    String username}) async {
   final requestUrl = 'https://slack.com/api/chat.postMessage?token=$API_TOKEN';
   dynamic requestBody = {
     'text': message,
@@ -112,7 +112,7 @@ sendMessage(String message, String channel,
   if (parse != null) {
     requestBody['parse'] = parse;
   }
-  http.post(requestUrl, body: requestBody);
+  return await http.post(requestUrl, body: requestBody);
 }
 
 // GET Username from UID
