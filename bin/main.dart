@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'dart:convert';
-import 'package:comrade_bot/channels/random.dart';
 import 'package:comrade_bot/functions/comrade.dart';
 import 'package:comrade_bot/functions/flutter.dart';
 import 'package:comrade_bot/functions/cache.dart';
@@ -46,10 +45,6 @@ onMessage(message) {
   bool isAdmin = adminUsers.contains(user);
   if (text == null || user == null) {
     return;
-  }
-  // Random
-  if (channel == 'C0G07RYJD') {
-    randomManager(channel, message['ts'], user, text, isDev, isAdmin);
   }
   // Work in progress
   if (isDev && isAdmin) {
