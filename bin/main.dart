@@ -67,7 +67,7 @@ onMessage(message) {
       comradeManual(channel);
     } else if (text == '!flutter') {
       flutter(channel);
-    } else if (text == '!cache') {
+    } else if (text == '!cache' || text == '!clean') {
       cache(channel);
     }
   }
