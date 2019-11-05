@@ -42,6 +42,12 @@ Future<dynamic> getNextQuest(username, token) async {
         });
         return id != -1 && it['validated_at'] == null;
       });
+    } else {
+      return {
+        'ok': false,
+        'message':
+            "We working hard to add this feature comrade! :communist:"
+      };
     }
     if (sortedData.last['validated_at'] != null) {
       return {

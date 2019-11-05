@@ -7,7 +7,7 @@ usageParrot() {
 
 parrot(text, channel) {
   http.get('https://random-ize.com/random-youtube/').then((data) {
-    RegExp exp = new RegExp(r'https://www.youtube.com/embed/[^"]*');
+    RegExp exp = RegExp(r'https://www.youtube.com/embed/[^"]*');
     Match matche = exp.firstMatch(data.body);
     if (matche == null) {
       return parrot(text, channel);
