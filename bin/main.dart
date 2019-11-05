@@ -1,16 +1,17 @@
 import 'dart:io';
 import 'dart:convert';
-import 'package:comrade_bot/functions/comrade.dart';
-import 'package:comrade_bot/functions/flutter.dart';
-import 'package:comrade_bot/functions/cache.dart';
 import 'package:comrade_bot/slack_api.dart';
 import 'package:comrade_bot/api_manager.dart';
 import 'package:comrade_bot/functions/clim.dart';
 import 'package:comrade_bot/functions/ping.dart';
+import 'package:comrade_bot/functions/cache.dart';
 import 'package:comrade_bot/functions/parrot.dart';
+import 'package:comrade_bot/functions/flutter.dart';
+import 'package:comrade_bot/functions/comrade.dart';
 import 'package:comrade_bot/functions/travail.dart';
 import 'package:comrade_bot/slack_event_types.dart';
 import 'package:comrade_bot/functions/bonjour.dart';
+import 'package:comrade_bot/functions/translate.dart';
 
 String API_TOKEN_42;
 
@@ -61,6 +62,8 @@ onMessage(message) {
       ping(text, channel);
     } else if (text.startsWith('!travail')) {
       travail(text, channel, API_TOKEN_42, getUserFormUid(user));
+    } else if (text.startsWith('!translate')) {
+      translate(text, channel);
     } else if (text.startsWith('!parrot')) {
       parrot(text, channel);
     } else if (text == '!comrade') {

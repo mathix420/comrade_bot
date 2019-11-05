@@ -2,6 +2,7 @@ import 'package:comrade_bot/slack_api.dart';
 
 comradeManual(String channel) {
   String travail = "*Infos sur les quests d'un étudiant :*\n> !travail <username>\n";
+  String translate = "*Traduire un texte :*\n> !translate fr-en texte a traduire\n";
   String ping1 = "*Ping un utilisateur de slack :*\n> !ping <username>\n";
   String ping2 = "*Se ping sois-même :*\n> !ping\n";
   String parrot = "*Vidéo random de youtube :*\n> !parrot\n";
@@ -12,7 +13,7 @@ comradeManual(String channel) {
     channel,
     jsonAttachement: [
       {
-        "text": travail + ping1 + ping2 + parrot + flutter + clean,
+        "text": travail + translate + ping1 + ping2 + parrot + flutter + clean,
         "color": "#BC0000",
         "attachment_type": "default",
       }

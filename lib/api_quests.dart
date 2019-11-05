@@ -45,8 +45,7 @@ Future<dynamic> getNextQuest(username, token) async {
     } else {
       return {
         'ok': false,
-        'message':
-            "We working hard to add this feature comrade! :communist:"
+        'message': "We working hard to add this feature comrade! :communist:"
       };
     }
     if (sortedData.last['validated_at'] != null) {
