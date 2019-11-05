@@ -15,7 +15,8 @@ import 'package:comrade_bot/functions/translate.dart';
 
 String API_TOKEN_42;
 
-final List<String> adminUsers = ['UD3JY1QQ4', 'UD55KN8MU'];
+final List<String> adminUsers = ['UD3JY1QQ4', 'UD55KN8MU', 'UA05YTMDZ'];
+// ['MOI', 'KEVIN', 'YANNIS']
 
 main() {
   Directory('keys').createSync();

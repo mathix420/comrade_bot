@@ -2,7 +2,7 @@ import 'package:comrade_bot/log_manager.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<dynamic> getNextQuest(username, token) async {
+Future<dynamic> getNextQuest(String username, String token) async {
   List<int> questOrder = [1, 2, 3, 20, 19];
   String url = 'https://api.intra.42.fr/v2/users/$username/quests_users';
   Map<String, String> header = {"Authorization": "Bearer $token"};
@@ -63,6 +63,23 @@ Future<dynamic> getNextQuest(username, token) async {
     if (nextQuest['end_at'] != null) {
       var end = DateTime.parse(nextQuest['end_at']);
       var time = end.difference(DateTime.now()).inDays;
+
+      if (time < 0) {
+        return {
+          'ok': true,
+          'message':
+              """Comrade tes efforts on été vaint, tu as fini au goulag.
+:rip: :rip: :rip: :rip: :rip: :rip:
+<@$username>
+:rip: :rip: :rip: :rip: :rip: :rip:"""
+        };
+      } else if (time == 0) {
+        return {
+          'ok': true,
+          'message': """Prochnost comrade :muscle:
+C'est ton dernier jour pour valider _${nextQuest['quest']['name']}_ avant le prochain round!"""
+        };
+      }
 
       return {
         'ok': true,
