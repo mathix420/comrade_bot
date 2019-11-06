@@ -45,7 +45,7 @@ Future<dynamic> getNextQuest(String username, String token) async {
     } else {
       return {
         'ok': false,
-        'message': "We working hard to add this feature comrade! :communist:"
+        'message': "Sorry comrade but staff won't add an API route for new Black-Holes .. :sad_obama:"
       };
     }
     if (sortedData.last['validated_at'] != null) {
