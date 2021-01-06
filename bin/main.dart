@@ -18,7 +18,7 @@ String API_TOKEN_42;
 final List<String> adminUsers = ['UD3JY1QQ4', 'UD55KN8MU', 'UA05YTMDZ'];
 // ['MOI', 'KEVIN', 'YANNIS']
 
-main() {
+void main() {
   Directory('keys').createSync();
   File('keys/token_42.key').createSync();
   getApiToken().then((value) {
