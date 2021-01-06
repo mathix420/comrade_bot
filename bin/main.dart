@@ -6,11 +6,11 @@ import 'package:comrade_bot/functions/clim.dart';
 import 'package:comrade_bot/functions/ping.dart';
 import 'package:comrade_bot/functions/cache.dart';
 import 'package:comrade_bot/functions/parrot.dart';
-import 'package:comrade_bot/functions/flutter.dart';
 import 'package:comrade_bot/functions/comrade.dart';
 import 'package:comrade_bot/functions/travail.dart';
 import 'package:comrade_bot/slack_event_types.dart';
 import 'package:comrade_bot/functions/bonjour.dart';
+import 'package:comrade_bot/functions/ez_utils.dart';
 import 'package:comrade_bot/functions/translate.dart';
 
 String API_TOKEN_42;
@@ -71,6 +71,14 @@ onMessage(message) {
       comradeManual(channel);
     } else if (text == '!flutter') {
       flutter(channel);
+    } else if (text == '!bot') {
+      hello(channel);
+    } else if (text == '!wifi') {
+      wifi(channel);
+    } else if (text == '!brew') {
+      brew(channel);
+    } else if (text == '!reset') {
+      reset(channel);
     } else if (text == '!cache' || text == '!clean') {
       cache(channel);
     }

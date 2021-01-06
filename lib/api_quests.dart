@@ -3,9 +3,9 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 Future<dynamic> getNextQuest(String username, String token) async {
-  List<int> questOrder = [1, 2, 3, 20, 19];
-  String url = 'https://api.intra.42.fr/v2/users/$username/quests_users';
-  Map<String, String> header = {"Authorization": "Bearer $token"};
+  var questOrder = <int>[1, 2, 3, 20, 19];
+  var url = 'https://api.intra.42.fr/v2/users/$username/quests_users';
+  var header = <String, String>{'Authorization': 'Bearer $token'};
   return await http.get(url, headers: header).then((recievedData) {
     if (recievedData.statusCode != 200) {
       print(recievedData.body);
@@ -16,7 +16,7 @@ Future<dynamic> getNextQuest(String username, String token) async {
       };
     }
     List<dynamic> decodedData = jsonDecode(recievedData.body);
-    List<Map> sortedData = [];
+    var sortedData = <Map>[];
     if (decodedData.isEmpty) {
       return {
         'ok': false,
@@ -36,7 +36,7 @@ Future<dynamic> getNextQuest(String username, String token) async {
             .compareTo(questOrder.indexOf(item2['quest_id']));
       });
       sortedData.removeWhere((it) {
-        int id = sortedData.indexWhere((item) {
+        var id = sortedData.indexWhere((item) {
           return item['quest_id'] == it['quest_id'] &&
               item['validated_at'] != null;
         });
@@ -52,13 +52,13 @@ Future<dynamic> getNextQuest(String username, String token) async {
       return {
         'ok': true,
         'message':
-            "Bon travail comrade, tu as validé toutes tes quests! :party-frog:"
+            'Bon travail comrade, tu as validé toutes tes quests! :party-frog:'
       };
     }
-    Map nextQuest = sortedData.firstWhere((item) {
+    var nextQuest = sortedData.firstWhere((item) {
       return item['validated_at'] == null;
     });
-    int todo = sortedData.length - (sortedData.indexOf(nextQuest));
+    var todo = sortedData.length - (sortedData.indexOf(nextQuest));
 
     if (nextQuest['end_at'] != null) {
       var end = DateTime.parse(nextQuest['end_at']);
@@ -68,10 +68,10 @@ Future<dynamic> getNextQuest(String username, String token) async {
         return {
           'ok': true,
           'message':
-              """Comrade tes efforts on été vaint, tu as fini au goulag.
+              '''Comrade tes efforts on été vaint, tu as fini au goulag.
 :rip: :rip: :rip: :rip: :rip: :rip:
 <@$username>
-:rip: :rip: :rip: :rip: :rip: :rip:"""
+:rip: :rip: :rip: :rip: :rip: :rip:'''
         };
       } else if (time == 0) {
         return {

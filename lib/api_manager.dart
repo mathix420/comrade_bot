@@ -8,7 +8,7 @@ String PRIVATE;
 final int timeOut = 7100;
 
 getKeys() {
-  Map<String, String> envVars = Platform.environment;
+  var envVars = Platform.environment;
   PUBLIC = envVars['INTRA_PUBLIC'];
   PRIVATE = envVars['INTRA_PRIVATE'];
 }

@@ -1,23 +1,28 @@
 import 'package:comrade_bot/slack_api.dart';
 
 comradeManual(String channel) {
-  String travail = "*Infos sur les quests d'un étudiant :*\n> !travail <username>\n";
-  String translate = "*Traduire un texte :*\n> !translate fr-en texte a traduire\n";
-  String ping1 = "*Ping un utilisateur de slack :*\n> !ping <username>\n";
-  String ping2 = "*Se ping sois-même :*\n> !ping\n";
-  String parrot = "*Vidéo random de youtube :*\n> !parrot\n";
-  String flutter = "*Installation de flutter :*\n> !flutter\n";
-  String clean = "*Nettoyage des caches :*\n> !cache || !clean";
+  var commands = [
+    '*Infos about student quests:*\n> !travail <username>',
+    '*Translation:*\n> !translate fr-en texte a traduire',
+    '*Ping slack user:*\n> !ping <username>',
+    '*Ping yourself:*\n> !ping',
+    '*Random youtube video:*\n> !parrot',
+    '*Install flutter:*\n> !flutter',
+    '*Clean caches:*\n> !cache || !clean',
+    '*Install brew:*\n> !brew',
+    '*Reset your session:*\n> !reset',
+    '*Wi-Fi:*\n> !wifi',
+  ];
   sendMessage(
-    "Privet comrade, voici le manuel d'utilisation de *Comrade 1.0* :",
+    'Privet comrade, voici le manuel d\'utilisation de *Comrade 1.0* :',
     channel,
-    jsonAttachement: [
-      {
-        "text": travail + translate + ping1 + ping2 + parrot + flutter + clean,
-        "color": "#BC0000",
-        "attachment_type": "default",
-      }
-    ],
+    jsonBlocks: commands.map((content) => ({
+      'type': 'section',
+			'text': {
+				'type': 'mrkdwn',
+				'text': content
+			}
+    })),
     icon_url: 'https://pm1.narvii.com/6778/3758ad21f6fdbf11bcb3aac5ea181d4132682a74v2_128.jpg',
     username: 'Comrade 42',
   );
