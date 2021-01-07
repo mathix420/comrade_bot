@@ -2,7 +2,6 @@ import 'dart:io';
 import 'dart:convert';
 import 'package:comrade_bot/functions/class.dart';
 import 'package:http/http.dart' as http;
-import 'package:comrade_bot/slack_api.dart';
 
 final Map<String, String> envVars = Platform.environment;
 final YANDEX_KEY = envVars['YANDEX_API'];
