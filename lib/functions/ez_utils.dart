@@ -1,46 +1,31 @@
-import 'package:comrade_bot/slack_api.dart';
+import 'package:comrade_bot/functions/class.dart';
 
-void brew(channel) {
-  sendMessage(
-    'Davaï `rm -rf \$HOME/.brew && git clone --depth=1 https://github.com/Homebrew/brew \$HOME/.brew && export PATH=\$HOME/.brew/bin:\$PATH && brew update && echo "export PATH=\$HOME/.brew/bin:\$PATH" >> ~/.zshrc`',
-    channel,
-    icon_url: 'https://pm1.narvii.com/6778/3758ad21f6fdbf11bcb3aac5ea181d4132682a74v2_128.jpg',
-    username: 'Comrade 42',
-  );
-}
+final chans = ['C8Y2AQR6D'];
 
-void flutter(channel) {
-  sendMessage(
-    'Bonne chance comrade\n`curl --silent https://raw.githubusercontent.com/mathix420/flutter_installer/master/flutter_install.sh | zsh`',
-    channel,
-    icon_url: 'https://pm1.narvii.com/6778/3758ad21f6fdbf11bcb3aac5ea181d4132682a74v2_128.jpg',
-    username: 'Comrade 42',
-  );
-}
+final brew = ComradeCommand(['!brew'], '*Install Brew:*\n> `!brew`', (channel, message, user) {
+  return 'Davaï `rm -rf \$HOME/.brew && git clone --depth=1 https://github.com/Homebrew/brew \$HOME/.brew && export PATH=\$HOME/.brew/bin:\$PATH && brew update && echo "export PATH=\$HOME/.brew/bin:\$PATH" >> ~/.zshrc`';
+}, chans: chans);
 
-void reset(channel) {
-  sendMessage(
-    'Reset: `touch ~/.reset`\nReset library: `touch ~/.reset_library`\nThen logout and login again.',
-    channel,
-    icon_url: 'https://pm1.narvii.com/6778/3758ad21f6fdbf11bcb3aac5ea181d4132682a74v2_128.jpg',
-    username: 'Comrade 42',
-  );
-}
+final valgrind = ComradeCommand(['!valgrind'], '*Install Valgrind:*\n> `!valgrind`', (channel, message, user) {
+  return '`brew update && brew install valgrind && alias valgrind="~/.brew/bin/valgrind"`';
+}, chans: chans);
 
-void hello(channel) {
-  sendMessage(
-    'Here to serve you comrade, type `!comrade`.',
-    channel,
-    icon_url: 'https://pm1.narvii.com/6778/3758ad21f6fdbf11bcb3aac5ea181d4132682a74v2_128.jpg',
-    username: 'Comrade 42',
-  );
-}
+final flutter = ComradeCommand(['!flutter'], '*Install Flutter:*\n> `!flutter`', (channel, message, user) {
+  return 'Bonne chance comrade\n`curl --silent https://raw.githubusercontent.com/mathix420/flutter_installer/master/flutter_install.sh | zsh`';
+}, chans: chans);
 
-void wifi(channel) {
-  sendMessage(
-    'Stay connected comrade http://wifi.42.fr.',
-    channel,
-    icon_url: 'https://pm1.narvii.com/6778/3758ad21f6fdbf11bcb3aac5ea181d4132682a74v2_128.jpg',
-    username: 'Comrade 42',
-  );
-}
+final reset = ComradeCommand(['!reset'], '*Reset your session:*\n> `!reset`', (channel, message, user) {
+  return 'Reset: `touch ~/.reset`\nReset library: `touch ~/.reset_library`\nThen logout and login again.';
+}, chans: chans);
+
+final hello = ComradeCommand(['!bot'], null, (channel, message, user) {
+  return 'Here to serve you comrade, type `!comrade`.';
+}, chans: chans);
+
+final wifi = ComradeCommand(['!wifi'], '*Wi-Fi:*\n> `!wifi`', (channel, message, user) {
+  return 'Stay connected comrade http://wifi.42.fr.';
+}, chans: chans);
+
+final norm = ComradeCommand(['!norm'], '*Norm PDF:*\n> `!norm`', (channel, message, user) {
+  return '<https://cdn.intra.42.fr/pdf/pdf/317/norme.fr.pdf|Miaou, clique ici pour la Norme 2.0.2 🇫🇷> • <https://cdn.intra.42.fr/pdf/pdf/1065/norme.en.pdf|Meow, click here for Norm 2.0.2 🇺🇸>';
+}, chans: chans);

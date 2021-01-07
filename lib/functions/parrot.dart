@@ -1,24 +1,35 @@
+import 'package:comrade_bot/functions/class.dart';
 import 'package:http/http.dart' as http;
-import 'package:comrade_bot/slack_api.dart';
 
-String usageParrot() {
-  return 'Utilisation :\n`!ping {username}`\n`!ping`';
-}
+int count = 0;
 
-void parrot(text, channel) {
-  http.get('https://random-ize.com/random-youtube/').then((data) {
-    var exp = RegExp(r'https://www.youtube.com/embed/[^"]*');
-    Match matche = exp.firstMatch(data.body);
-    if (matche == null) {
-      return parrot(text, channel);
+Future<String> rndVideo() async {
+  count += 1;
+  if (count >= 10) {
+    return 'Sorry no videos for now :sad_blob:';
+  }
+
+  return http.get('https://random-ize.com/random-youtube/').then((data) {
+    final exp = RegExp(r'https://www.youtube.com/embed/[^"]*');
+    Match match = exp.firstMatch(data.body);
+
+    if (match == null) {
+      return rndVideo();
     }
-    var dest = 'https://youtu.be/';
-    var res = dest + matche.groups([0])[0].split('/').last;
-    sendMessage(
-      '$res',
-      channel,
-      icon_emoji: ':parrotwithmustache:',
-      username: 'Parrot',
-    );
+
+    return 'https://youtu.be/' + match.groups([0])[0].split('/').last;
   });
 }
+
+final parrot = ComradeCommand(['!parrot'],
+  '*Random youtube video:*\n> `!parrot`',
+  (channel, args, user) async {
+    count = 0;
+    return {
+      'message': await rndVideo(),
+      'icon_emoji': ':parrot:'
+    };
+  },
+  chans: ['C8Y2AQR6D'],
+  botName: 'Comrade Parrot',
+);

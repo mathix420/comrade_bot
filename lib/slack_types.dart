@@ -74,6 +74,11 @@ List<String> eventTypesString = [
   'url_verification',
 ];
 
+Map<String, String> slackChannels = {
+  'tools_bots': 'C8Y2AQR6D',
+  '_general': 'CMX2R5JSW',
+};
+
 enum eventTypes {
   app_home_opened,
   app_mention,

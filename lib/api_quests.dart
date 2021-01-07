@@ -2,7 +2,7 @@ import 'package:comrade_bot/log_manager.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<dynamic> getNextQuest(String username, String token) async {
+Future<Map> getNextQuest(String username, String token) async {
   var questOrder = <int>[1, 2, 3, 20, 19];
   var url = 'https://api.intra.42.fr/v2/users/$username/quests_users';
   var header = <String, String>{'Authorization': 'Bearer $token'};

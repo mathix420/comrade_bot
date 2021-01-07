@@ -1,7 +1,7 @@
 import 'package:http/http.dart' as http;
+import 'slack_types.dart';
 import 'dart:convert';
 import 'dart:io';
-import 'slack_event_types.dart';
 
 String API_TOKEN;
 
@@ -64,8 +64,8 @@ void addReaction(String emoji, String channel, String timestamp) {
 }
 
 // Slack API for sending messages
-Future<dynamic> sendMessage(String message, String channel,
-    {bool as_user = false,
+Future<dynamic> sendMessage(String message, String channel, {
+    bool as_user = false,
     dynamic jsonAttachement,
     dynamic jsonBlocks,
     String icon_emoji,
@@ -77,7 +77,8 @@ Future<dynamic> sendMessage(String message, String channel,
     double thread_ts,
     bool unfurl_links = false,
     bool unfurl_media = true,
-    String username}) async {
+    String username
+  }) async {
   final requestUrl = 'https://slack.com/api/chat.postMessage?token=$API_TOKEN';
   dynamic requestBody = {
     'text': message,

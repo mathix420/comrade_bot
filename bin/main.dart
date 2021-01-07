@@ -1,22 +1,14 @@
 import 'dart:io';
 import 'dart:convert';
-import 'package:comrade_bot/slack_api.dart';
+import 'package:comrade_bot/global.dart' as g;
+import 'package:comrade_bot/slack_types.dart';
 import 'package:comrade_bot/api_manager.dart';
-import 'package:comrade_bot/functions/clim.dart';
-import 'package:comrade_bot/functions/ping.dart';
-import 'package:comrade_bot/functions/cache.dart';
-import 'package:comrade_bot/functions/parrot.dart';
-import 'package:comrade_bot/functions/comrade.dart';
-import 'package:comrade_bot/functions/travail.dart';
-import 'package:comrade_bot/slack_event_types.dart';
-import 'package:comrade_bot/functions/bonjour.dart';
-import 'package:comrade_bot/functions/ez_utils.dart';
-import 'package:comrade_bot/functions/translate.dart';
+import 'package:comrade_bot/slack_api.dart';
+import 'package:comrade_bot/handlers.dart';
 
-String API_TOKEN_42;
 
 final List<String> adminUsers = ['UD3JY1QQ4', 'UD55KN8MU'];
-// ['MOI', 'KEVIN']
+// ['AGISSING', 'KEMARTIN']
 
 void main() {
   Directory('keys').createSync();
@@ -30,7 +22,7 @@ void main() {
 }
 
 void setToken(responseData) {
-  API_TOKEN_42 = jsonDecode(responseData)['access_token'];
+  g.API_TOKEN_42 = jsonDecode(responseData)['access_token'];
 }
 
 void botStartup() {
@@ -40,47 +32,27 @@ void botStartup() {
 }
 
 void onMessage(message) {
-  String channel = message['channel'];
-  String user = message['user'];
-  String text = message['text'];
+  var channel = message['channel'];
+  var user = message['user'];
+  var text = message['text'];
+
   var isDev = Platform.environment['dev'] == 'true';
   var isAdmin = adminUsers.contains(user);
   if (text == null || user == null) {
     return;
   }
-  // Work in progress
+
+  var args = text.split(' ');
+
   if (isDev && isAdmin) {
-    if (text.startsWith('!clim')) {
-      clim(text, channel);
-    } else if (text == '!bonjour') {
-      bonjour(channel);
-    }
+    channel = 'C8Y2AQR6D';
   }
-  // Only released features
-  if ((channel == 'C8Y2AQR6D' && !isDev) ||
-      (isDev && isAdmin && channel != 'C8Y2AQR6D')) {
-    if (text.startsWith('!ping')) {
-      ping(text, channel);
-    } else if (text.startsWith('!travail')) {
-      travail(text, channel, API_TOKEN_42, getUserFormUid(user));
-    } else if (text.startsWith('!translate')) {
-      translate(text, channel);
-    } else if (text.startsWith('!parrot')) {
-      parrot(text, channel);
-    } else if (text == '!comrade') {
-      comradeManual(channel);
-    } else if (text == '!flutter') {
-      flutter(channel);
-    } else if (text == '!bot') {
-      hello(channel);
-    } else if (text == '!wifi') {
-      wifi(channel);
-    } else if (text == '!brew') {
-      brew(channel);
-    } else if (text == '!reset') {
-      reset(channel);
-    } else if (text == '!cache' || text == '!clean') {
-      cache(channel);
+
+  if (handlerTree.containsKey(channel) && handlerTree[channel].containsKey(args[0])) {
+    if (isDev && isAdmin) {
+      handlerTree[channel][args[0]].checkAndLaunch(message['channel'], args, user);
+    } else if (!isDev) {
+      handlerTree[channel][args[0]].checkAndLaunch(channel, args, user);
     }
   }
 }

@@ -1,10 +1,10 @@
-import 'package:comrade_bot/slack_api.dart';
+import 'package:comrade_bot/functions/class.dart';
 
-void cache(channel) {
-  sendMessage(
-    '*Be careful:* `rm -r ~/Library/Caches/*; rm ~/.zcompdump*; brew cleanup`',
-    channel,
-    icon_url: 'https://pm1.narvii.com/6778/3758ad21f6fdbf11bcb3aac5ea181d4132682a74v2_128.jpg',
-    username: 'Comrade 42',
-  );
-}
+final help = '''
+*Clean caches:*
+> `!cache` or `!clean`
+''';
+
+var cache = ComradeCommand(['!cache', '!clean'], help, (channel, message, user) {
+  return '*Be careful:* `rm -r ~/Library/Caches/*; rm ~/.zcompdump*; brew cleanup`';
+}, chans: ['C8Y2AQR6D']);

@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'dart:convert';
+import 'package:comrade_bot/functions/class.dart';
 import 'package:http/http.dart' as http;
 import 'package:comrade_bot/slack_api.dart';
 
@@ -12,28 +13,15 @@ final String yandex_url =
 final String icon =
     'https://pm1.narvii.com/6778/3758ad21f6fdbf11bcb3aac5ea181d4132682a74v2_128.jpg';
 
-void sendResponse(String message, String subMessage, String channel) {
-  sendMessage(
-    message,
-    channel,
-    jsonAttachement: [
-      {
-        'text': subMessage,
-        'color': '#BC0000',
-        'attachment_type': 'default',
-      }
-    ],
-    icon_url: icon,
-    username: 'Comrade 42',
-  );
-}
-
-void usageTranslate(String channel) {
-  sendResponse(
-    'Désolé comrade, il semblerai que tu te sois trompé !\nUtilisation :',
-    '`!translate fr-en texte a traduire`',
-    channel,
-  );
+Map<String, dynamic> formatMessage(String main, String sub) {
+  return {
+    'message': main,
+    'jsonAttachement': [{
+      'text': sub,
+      'color': '#BC0000',
+      'attachment_type': 'default',
+    }]
+  };
 }
 
 Future<String> queryYandex(String slug, String text) async {
@@ -51,17 +39,24 @@ Future<String> queryYandex(String slug, String text) async {
   return translation['text'].join('\n');
 }
 
-void translate(String text, String channel) {
-  final splittedText = text.split(' ');
-  final regex = RegExp(r'^[a-z]{2,3}-[a-z]{2,3}$');
-  final mainMessage = 'Vodka translator v0.1';
-  if (splittedText.length < 3 || !regex.hasMatch(splittedText[1])) {
-    usageTranslate(channel);
-    return;
-  }
-  final translateSlug = splittedText[1];
-  final textToTranslate = splittedText.sublist(2).join(' ');
-  queryYandex(translateSlug, textToTranslate).then((translation) {
-    sendResponse(mainMessage, translation, channel);
-  });
-}
+final translate = ComradeCommand(['!translate', '!tr'],
+  '*Translation:*\n> `!translate fr-en texte a traduire`',
+  (channel, args, user) async {
+    final regex = RegExp(r'^[a-z]{2,3}-[a-z]{2,3}$');
+    final mainMessage = 'Vodka translator v0.1';
+
+    if (args.length < 3 || !regex.hasMatch(args[1])) {
+      return formatMessage(
+        'Désolé comrade, il semblerai que tu te sois trompé !\nUtilisation :',
+        '`!translate fr-en texte a traduire`'
+      );
+    }
+
+    final translateSlug = args[1];
+    final textToTranslate = args.sublist(2).join(' ');
+    final translation = await queryYandex(translateSlug, textToTranslate);
+
+    return formatMessage(mainMessage, translation);
+  },
+  chans: ['C8Y2AQR6D']
+);

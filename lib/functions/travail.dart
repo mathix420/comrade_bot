@@ -1,50 +1,38 @@
+import 'package:comrade_bot/functions/class.dart';
+import 'package:comrade_bot/global.dart' as g;
 import 'package:comrade_bot/api_quests.dart';
 import 'package:comrade_bot/slack_api.dart';
 
-final String icon =
-    'https://pm1.narvii.com/6778/3758ad21f6fdbf11bcb3aac5ea181d4132682a74v2_128.jpg';
 
-Map<String, List<String>> easterEggs = {
-};
-
-void sendResponse(String message, String subMessage, String channel) {
-  sendMessage(
-    message,
-    channel,
-    jsonAttachement: [
-      {
-        'text': subMessage,
-        'color': '#BC0000',
-        'attachment_type': 'default',
-      }
-    ],
-    icon_url: icon,
-    username: 'Comrade 42',
-  );
+Map<String, dynamic> formatMessage(String main, String sub) {
+  return {
+    'message': main,
+    'jsonAttachement': [{
+      'text': sub,
+      'color': '#BC0000',
+      'attachment_type': 'default',
+    }]
+  };
 }
 
-void usageTravail(String channel) {
-  sendResponse(
-    'Désolé comrade, il semblerai que tu te sois trompé !\nUtilisation :',
-    '`!travail <username>`',
-    channel,
-  );
-}
-
-void travail(String text, String channel, String apiToken, userRequest) {
-  var splittedText = text.split(' ');
-  final regex = RegExp(r'^[a-zA-Z-]+$');
-  var mainMessage = 'Ravi de te revoir comrade !';
-  if (splittedText.length != 2 || !regex.hasMatch(splittedText[1])) {
-    usageTravail(channel);
-    return;
-  }
-  getNextQuest(splittedText[1], apiToken).then((result) {
-    userRequest.then((name) {
-      if (result['ok'] && name != splittedText[1]) {
-        mainMessage = 'Devrai-je prévenir comrade <@${splittedText[1]}>?';
-      }
-      sendResponse(mainMessage, result['message'], channel);
-    });
-  });
-}
+final travail = ComradeCommand(['!travail'],
+  '*Infos about student quests:*\n> `!travail <username>`',
+  (channel, args, user) async {
+    final futureName = getUserFormUid(user);
+    final regex = RegExp(r'^[a-zA-Z-]+$');
+    var mainMessage = 'Ravi de te revoir comrade !';
+    if (args.length != 2 || !regex.hasMatch(args[1])) {
+      return formatMessage(
+        'Désolé comrade, il semblerai que tu te sois trompé !\nUtilisation :',
+        '`!travail <username>`'
+      );
+    }
+    final result = await getNextQuest(args[1], g.API_TOKEN_42);
+    final name = await futureName;
+    if (result['ok'] && name != args[1]) {
+      mainMessage = 'Devrai-je prévenir comrade <@${args[1]}>?';
+    }
+    return formatMessage(mainMessage, result['message']);
+  },
+  chans: ['C8Y2AQR6D']
+);
