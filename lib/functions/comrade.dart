@@ -1,6 +1,6 @@
 import 'package:comrade_bot/slack_api.dart';
 
-comradeManual(String channel) {
+void comradeManual(String channel) {
   var commands = [
     '*Infos about student quests:*\n> !travail <username>',
     '*Translation:*\n> !translate fr-en texte a traduire',

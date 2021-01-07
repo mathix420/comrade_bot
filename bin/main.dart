@@ -15,8 +15,8 @@ import 'package:comrade_bot/functions/translate.dart';
 
 String API_TOKEN_42;
 
-final List<String> adminUsers = ['UD3JY1QQ4', 'UD55KN8MU', 'UA05YTMDZ'];
-// ['MOI', 'KEVIN', 'YANNIS']
+final List<String> adminUsers = ['UD3JY1QQ4', 'UD55KN8MU'];
+// ['MOI', 'KEVIN']
 
 void main() {
   Directory('keys').createSync();
@@ -29,22 +29,22 @@ void main() {
   });
 }
 
-setToken(responseData) {
+void setToken(responseData) {
   API_TOKEN_42 = jsonDecode(responseData)['access_token'];
 }
 
-botStartup() {
+void botStartup() {
   startingRtm({
     eventTypes.message: onMessage,
   });
 }
 
-onMessage(message) {
+void onMessage(message) {
   String channel = message['channel'];
   String user = message['user'];
   String text = message['text'];
-  bool isDev = Platform.environment['dev'] == 'true';
-  bool isAdmin = adminUsers.contains(user);
+  var isDev = Platform.environment['dev'] == 'true';
+  var isAdmin = adminUsers.contains(user);
   if (text == null || user == null) {
     return;
   }

@@ -7,13 +7,13 @@ String PRIVATE;
 
 final int timeOut = 7100;
 
-getKeys() {
+void getKeys() {
   var envVars = Platform.environment;
   PUBLIC = envVars['INTRA_PUBLIC'];
   PRIVATE = envVars['INTRA_PRIVATE'];
 }
 
-tokenChecker(Function callback) async {
+void tokenChecker(Function callback) async {
   await Future.delayed(Duration(seconds: timeOut)).then((data) {
     getNewToken().then((String response) {
       callback(response);

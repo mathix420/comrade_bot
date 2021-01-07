@@ -1,6 +1,6 @@
 import 'package:comrade_bot/slack_api.dart';
 
-brew(channel) {
+void brew(channel) {
   sendMessage(
     'Davaï `rm -rf \$HOME/.brew && git clone --depth=1 https://github.com/Homebrew/brew \$HOME/.brew && export PATH=\$HOME/.brew/bin:\$PATH && brew update && echo "export PATH=\$HOME/.brew/bin:\$PATH" >> ~/.zshrc`',
     channel,
@@ -9,7 +9,7 @@ brew(channel) {
   );
 }
 
-flutter(channel) {
+void flutter(channel) {
   sendMessage(
     'Bonne chance comrade\n`curl --silent https://raw.githubusercontent.com/mathix420/flutter_installer/master/flutter_install.sh | zsh`',
     channel,
@@ -18,7 +18,7 @@ flutter(channel) {
   );
 }
 
-reset(channel) {
+void reset(channel) {
   sendMessage(
     'Reset: `touch ~/.reset`\nReset library: `touch ~/.reset_library`\nThen logout and login again.',
     channel,
@@ -27,7 +27,7 @@ reset(channel) {
   );
 }
 
-hello(channel) {
+void hello(channel) {
   sendMessage(
     'Here to serve you comrade, type `!comrade`.',
     channel,
@@ -36,7 +36,7 @@ hello(channel) {
   );
 }
 
-wifi(channel) {
+void wifi(channel) {
   sendMessage(
     'Stay connected comrade http://wifi.42.fr.',
     channel,

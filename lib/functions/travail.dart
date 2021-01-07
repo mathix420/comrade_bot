@@ -7,15 +7,15 @@ final String icon =
 Map<String, List<String>> easterEggs = {
 };
 
-sendResponse(String message, String subMessage, String channel) {
+void sendResponse(String message, String subMessage, String channel) {
   sendMessage(
     message,
     channel,
     jsonAttachement: [
       {
-        "text": subMessage,
-        "color": "#BC0000",
-        "attachment_type": "default",
+        'text': subMessage,
+        'color': '#BC0000',
+        'attachment_type': 'default',
       }
     ],
     icon_url: icon,
@@ -23,18 +23,18 @@ sendResponse(String message, String subMessage, String channel) {
   );
 }
 
-usageTravail(String channel) {
+void usageTravail(String channel) {
   sendResponse(
-    "Désolé comrade, il semblerai que tu te sois trompé !\nUtilisation :",
-    "`!travail <username>`",
+    'Désolé comrade, il semblerai que tu te sois trompé !\nUtilisation :',
+    '`!travail <username>`',
     channel,
   );
 }
 
-travail(String text, String channel, String apiToken, userRequest) {
-  List<String> splittedText = text.split(' ');
+void travail(String text, String channel, String apiToken, userRequest) {
+  var splittedText = text.split(' ');
   final regex = RegExp(r'^[a-zA-Z-]+$');
-  String mainMessage = "Ravi de te revoir comrade !";
+  var mainMessage = 'Ravi de te revoir comrade !';
   if (splittedText.length != 2 || !regex.hasMatch(splittedText[1])) {
     usageTravail(channel);
     return;
@@ -42,7 +42,7 @@ travail(String text, String channel, String apiToken, userRequest) {
   getNextQuest(splittedText[1], apiToken).then((result) {
     userRequest.then((name) {
       if (result['ok'] && name != splittedText[1]) {
-        mainMessage = "Devrai-je prévenir comrade <@${splittedText[1]}>?";
+        mainMessage = 'Devrai-je prévenir comrade <@${splittedText[1]}>?';
       }
       sendResponse(mainMessage, result['message'], channel);
     });

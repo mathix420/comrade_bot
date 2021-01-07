@@ -1,10 +1,10 @@
 import 'package:comrade_bot/slack_api.dart';
 
-usagePing() {
-  return "Utilisation :\n`!ping {login 42}`\n`!ping`";
+String usagePing() {
+  return 'Utilisation :\n`!ping {login 42}`\n`!ping`';
 }
 
-ping(String text, String channel) {
+void ping(String text, String channel) {
   sendMessage(
     pingMachine(text),
     channel,
@@ -15,13 +15,13 @@ ping(String text, String channel) {
 }
 
 String pingMachine(String text) {
-  List<String> splittedText = text.split(' ');
+  var splittedText = text.split(' ');
   if (splittedText.length > 2) {
     return usagePing();
   }
   final regex = RegExp(r'^[a-zA-Z-]+$');
   if (splittedText.length == 2 && regex.hasMatch(splittedText[1])) {
-    return "pong <@${splittedText[1]}>";
+    return 'pong <@${splittedText[1]}>';
   }
-  return "pong";
+  return 'pong';
 }

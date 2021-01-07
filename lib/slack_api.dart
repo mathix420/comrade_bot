@@ -9,12 +9,12 @@ String API_TOKEN;
 
 Map<eventTypes, Function> functionWrapper = {};
 
-getSlackToken() {
-  Map<String, String> envVars = Platform.environment;
+void getSlackToken() {
+  var envVars = Platform.environment;
   API_TOKEN = envVars['SLACK_PRIVATE'];
 }
 
-startingRtm([Map<eventTypes, Function> functions]) async {
+void startingRtm([Map<eventTypes, Function> functions]) async {
   if (functions.isNotEmpty) {
     functionWrapper.addAll(functions);
   }
@@ -39,12 +39,12 @@ startingRtm([Map<eventTypes, Function> functions]) async {
   });
 }
 
-slackSocketError(error) {
+void slackSocketError(error) {
   print('Error: An error occurs in Slack socket!');
   print(error.toString());
 }
 
-slackListener(receiveData) {
+void slackListener(receiveData) {
   Map dataInfos = jsonDecode(receiveData);
   functionWrapper.forEach((type, function) {
     if (dataInfos['type'] == eventTypesString[type.index]) {
@@ -53,7 +53,7 @@ slackListener(receiveData) {
   });
 }
 
-addReaction(String emoji, String channel, String timestamp) {
+void addReaction(String emoji, String channel, String timestamp) {
   final reqUrl = 'https://slack.com/api/reactions.add?token=$API_TOKEN';
   dynamic requestBody = {
     'name': emoji,
