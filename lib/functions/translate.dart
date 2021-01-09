@@ -35,7 +35,7 @@ Future<String> queryAPI(String slug, String text) async {
   }
   Map<String, dynamic> translation = jsonDecode(res.body);
   if (translation['responseStatus'] != 200) {
-    return 'Error: bad response from MyMemory API.\n${translation.toString()}';
+    return 'Error: bad response from MyMemory API.\n${translation["responseDetails"]}';
   }
   return unescape.convert(translation['responseData']['translatedText']);
 }
