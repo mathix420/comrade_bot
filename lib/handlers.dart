@@ -24,6 +24,7 @@ final handlers = [
   norm,
   hello,
   wifi,
+  nestor,
   comrade,
 ];
 
