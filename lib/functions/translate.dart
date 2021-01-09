@@ -1,16 +1,14 @@
-import 'dart:io';
-import 'dart:convert';
+import 'package:html_unescape/html_unescape.dart';
 import 'package:comrade_bot/functions/class.dart';
 import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'dart:io';
 
 final Map<String, String> envVars = Platform.environment;
-final YANDEX_KEY = envVars['YANDEX_API'];
-
-final String yandex_url =
-    'https://translate.yandex.net/api/v1.5/tr.json/translate?key=$YANDEX_KEY';
-
-final String icon =
-    'https://pm1.narvii.com/6778/3758ad21f6fdbf11bcb3aac5ea181d4132682a74v2_128.jpg';
+final MYMEMORY_SECRET = envVars['MYMEMORY_SECRET'];
+final unescape = HtmlUnescape();
+final String endpoint =
+    'https://translated-mymemory---translation-memory.p.rapidapi.com/api/get?mt=1';
 
 Map<String, dynamic> formatMessage(String main, String sub) {
   return {
@@ -23,19 +21,23 @@ Map<String, dynamic> formatMessage(String main, String sub) {
   };
 }
 
-Future<String> queryYandex(String slug, String text) async {
-  final res = await http.get('$yandex_url&lang=$slug&text=$text');
+Future<String> queryAPI(String slug, String text) async {
+  final res = await http.get('$endpoint&langpair=$slug&q=$text',
+  headers: {
+    'x-rapidapi-key': MYMEMORY_SECRET,
+    'x-rapidapi-host': 'translated-mymemory---translation-memory.p.rapidapi.com'
+  });
   if (res.statusCode == 400) {
     return 'Bad language code `$slug`!';
   }
   if (res.statusCode != 200) {
-    return 'Error ${res.statusCode}: bad response from Yandex API.';
+    return 'Error ${res.statusCode}: bad response from MyMemory API.';
   }
   Map<String, dynamic> translation = jsonDecode(res.body);
-  if (translation['code'] != 200) {
-    return 'Error: bad response from Yandex API.\n${translation.toString()}';
+  if (translation['responseStatus'] != 200) {
+    return 'Error: bad response from MyMemory API.\n${translation.toString()}';
   }
-  return translation['text'].join('\n');
+  return unescape.convert(translation['responseData']['translatedText']);
 }
 
 final translate = ComradeCommand(['!translate', '!tr'],
@@ -51,9 +53,9 @@ final translate = ComradeCommand(['!translate', '!tr'],
       );
     }
 
-    final translateSlug = args[1];
+    final translateSlug = args[1].replaceFirst('-', '|');
     final textToTranslate = args.sublist(2).join(' ');
-    final translation = await queryYandex(translateSlug, textToTranslate);
+    final translation = await queryAPI(translateSlug, textToTranslate);
 
     return formatMessage(mainMessage, translation);
   },
