@@ -16,3 +16,6 @@ keys/
 
 #logs
 logs/
+
+#dotenv
+.env
