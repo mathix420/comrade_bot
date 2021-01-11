@@ -1,6 +1,7 @@
 import 'package:comrade_bot/functions/class.dart';
+import 'package:comrade_bot/slack_types.dart';
 
-final chans = ['C8Y2AQR6D'];
+final chans = [slackChannels['tools_bots']];
 
 final brew = ComradeCommand(['!brew'], '*Install Brew:*\n> `!brew`', (channel, message, user) {
   return 'Davaï `rm -rf \$HOME/.brew && git clone --depth=1 https://github.com/Homebrew/brew \$HOME/.brew && export PATH=\$HOME/.brew/bin:\$PATH && brew update && echo "export PATH=\$HOME/.brew/bin:\$PATH" >> ~/.zshrc`';

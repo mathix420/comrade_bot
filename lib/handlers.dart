@@ -3,6 +3,7 @@ import 'package:comrade_bot/functions/ping.dart';
 import 'package:comrade_bot/functions/class.dart';
 import 'package:comrade_bot/functions/cache.dart';
 import 'package:comrade_bot/functions/parrot.dart';
+import 'package:comrade_bot/functions/slavme.dart';
 import 'package:comrade_bot/functions/comrade.dart';
 import 'package:comrade_bot/functions/travail.dart';
 import 'package:comrade_bot/functions/bonjour.dart';
@@ -20,6 +21,7 @@ final handlers = [
   translate,
   bonjour,
   parrot,
+  slavme,
   reset,
   norm,
   hello,
