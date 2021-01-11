@@ -15,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Deploy Image to Heroku
-        uses: meska/heroku-deploy@f6ff8db5e943fe0398a663d92f300cdd428d57e1
+        uses: gonuit/heroku-docker-deploy@v1.2.0
         with:
           heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
           email: ${{ secrets.HEROKU_EMAIL }}
