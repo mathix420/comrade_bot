@@ -16,6 +16,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Deploy Docker Image to Heroku App
+        id: heroku
         uses: jctaveras/heroku-deploy@v2.1.1
         with:
           email: ${{ secrets.HEROKU_EMAIL }}
