@@ -2,7 +2,9 @@ name: Deploy image Docker
 
 on:
   push:
-    paths: image/**
+    paths:
+      - 'image/**'
+      - '.github/workflows/main.yml'
     branches: [ master ]
 
   workflow_dispatch:
