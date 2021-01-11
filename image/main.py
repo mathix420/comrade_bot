@@ -51,7 +51,6 @@ def get_chart(bg_id, username):
     )
 
 
-if __name__ == "__main__":
-    from os import getenv
-
-    app.run(host=getenv('HOST', '0.0.0.0'), port=getenv('PORT', 4242))
+@app.route('/')
+def home():
+    return 'x'
