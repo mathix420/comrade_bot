@@ -14,9 +14,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-
       - name: Deploy Image to Heroku
-        uses: meska/heroku-deploy
+        uses: meska/heroku-deploy@f6ff8db5e943fe0398a663d92f300cdd428d57e1
         with:
           email: ${{ secrets.HEROKU_EMAIL }}
           api_key: ${{ secrets.HEROKU_API_KEY }}
