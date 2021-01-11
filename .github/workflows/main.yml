@@ -15,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Deploy Image to Heroku
-        uses: gonuit/heroku-docker-deploy@v1.2.0
+        uses: mathix420/heroku-docker-deploy@88b2605b6acc4955b0f38d3f622d4b79ff610512
         with:
           heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
           email: ${{ secrets.HEROKU_EMAIL }}
