@@ -29,7 +29,7 @@ final wifi = ComradeCommand(['!wifi'], '*Wi-Fi:*\n> `!wifi`', (channel, message,
 
 final norm = ComradeCommand(['!norm'], '*Norm PDF:*\n> `!norm`', (channel, message, user) {
   return '<https://cdn.intra.42.fr/pdf/pdf/317/norme.fr.pdf|Miaou, clique ici pour la Norme 2.0.2 🇫🇷> • <https://cdn.intra.42.fr/pdf/pdf/1065/norme.en.pdf|Meow, click here for Norm 2.0.2 🇺🇸>';
-}, chans: chans);
+}, chans: chans, botIcon: 'https://cdn.intra.42.fr/users/small_norminet.jpg');
 
 final nestor = ComradeCommand(['!nestor'], '*Nestor discount:*\n> `!nestor`', (channel, message, user) {
   return '<https://nestorparis.com/?sponsorshipCode=waPwf|Get 4€ on your first command!> :chef2:';
