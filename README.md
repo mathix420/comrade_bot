@@ -2,6 +2,22 @@ A simple Slack bot.
 
 # Disclamer
 
-> Ce bot n'as aucun but politique,
-> L'URSS est uniquement une référence comique
-> à la première commande de ce bot : `!travail`.
+> This bot has no political goals,
+> The USSR theme is only a comic reference
+> to the first command of this bot: `!travail`.
+
+# Environment
+
+`.vscode/settings.json`
+```
+{
+    "dart.env": {
+        "INTRA_PRIVATE": "",
+        "INTRA_PUBLIC": "",
+        "INTRA_SESSION": "",
+        "SLACK_PRIVATE": "",
+        "MYMEMORY_SECRET": "",
+        "dev": "true",
+    }
+}
+```

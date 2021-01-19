@@ -1,5 +1,4 @@
 import 'package:comrade_bot/functions/class.dart';
-import 'package:comrade_bot/global.dart' as g;
 import 'package:comrade_bot/api_quests.dart';
 import 'package:comrade_bot/slack_api.dart';
 
@@ -27,7 +26,7 @@ final travail = ComradeCommand(['!travail'],
         '`!travail <username>`'
       );
     }
-    final result = await getNextQuest(args[1], g.API_TOKEN_42);
+    final result = await getNextQuest(args[1]);
     final name = await futureName;
     if (result['ok'] && name != args[1]) {
       mainMessage = 'Devrai-je prévenir comrade <@${args[1]}>?';

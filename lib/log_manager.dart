@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:convert';
 
 void dumpToLog(dynamic jsonCompatibleVar, String logName) async {
+  print(jsonCompatibleVar);
   var logDir = Directory('logs');
   var logFile = File('logs/' + logName);
   if (!logDir.existsSync()) {

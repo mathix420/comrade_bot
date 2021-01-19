@@ -1,6 +1,6 @@
-import 'dart:io';
 import 'package:comrade_bot/log_manager.dart';
 import 'package:http/http.dart' as http;
+import 'dart:io';
 
 String PUBLIC;
 String PRIVATE;
