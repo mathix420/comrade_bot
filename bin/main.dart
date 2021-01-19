@@ -33,16 +33,17 @@ void botStartup() {
 
 void onMessage(message) {
   var channel = message['channel'];
-  var user = message['user'];
-  var text = message['text'];
+  final user = message['user'];
+  final String text = message['text'];
 
-  var isDev = Platform.environment['dev'] == 'true';
-  var isAdmin = adminUsers.contains(user);
+  final isDev = Platform.environment['dev'] == 'true';
+  final isAdmin = adminUsers.contains(user);
+
   if (text == null || user == null) {
     return;
   }
 
-  var args = text.split(' ');
+  final args = text.replaceAll(RegExp(r' +'), ' ').split(' ');
 
   if (isDev && isAdmin) {
     channel = 'C8Y2AQR6D';
