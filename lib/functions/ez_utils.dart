@@ -34,3 +34,15 @@ final norm = ComradeCommand(['!norm'], '*Norm PDF:*\n> `!norm`', (channel, messa
 final nestor = ComradeCommand(['!nestor'], '*Nestor discount:*\n> `!nestor`', (channel, message, user) {
   return '<https://nestorparis.com/?sponsorshipCode=waPwf|Get 4€ on your first command!> :chef2:';
 }, chans: chans);
+
+final norminette = ComradeCommand(['!norminette'], '*Install THE norminnette:*\n> `!norminette`', (channel, message, user) {
+  return '''May the norm be with you comrade! :norminet:
+```
+git clone https://github.com/42School/norminette.git ~/.norminette
+cd ~/.norminette
+pip3 install -r requirements.txt
+sudo python3 setup.py install
+```
+And then just run `norminette`.
+''';
+}, chans: chans);

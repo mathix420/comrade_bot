@@ -24,6 +24,7 @@ final handlers = [
   slavme,
   reset,
   norm,
+  norminette,
   hello,
   wifi,
   nestor,
