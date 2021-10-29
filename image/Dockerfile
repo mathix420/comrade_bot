@@ -1,4 +1,4 @@
-FROM nvidia/cuda
+FROM nvidia/cuda:11.4.2-base-ubuntu20.04
 
 WORKDIR /usr/src/app
 
