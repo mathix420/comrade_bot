@@ -10,6 +10,9 @@ build/
 # Directory created by dartdoc
 doc/api/
 
+# Python
+__pycache__/
+
 #API keys
 .vscode/
 keys/
