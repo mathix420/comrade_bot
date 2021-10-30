@@ -34,7 +34,7 @@ final QUESTS = {
 
 
 Future<dynamic> queryIntra(String username) {
-  final url = 'https://api.intra.42.fr/v2/users/$username/quests_users';
+  final url = Uri.parse('https://api.intra.42.fr/v2/users/$username/quests_users');
   final header = {'Authorization': 'Bearer ${g.API_TOKEN_42}'};
 
   return http.get(url, headers: header).then((data) {
@@ -51,7 +51,7 @@ Future<dynamic> queryIntra(String username) {
 }
 
 Future<int> getBHDate(String username) {
-  final url = 'https://profile.intra.42.fr/users/$username/goals?cursus=42cursus';
+  final url = Uri.parse('https://profile.intra.42.fr/users/$username/goals?cursus=42cursus');
   final header = {'Cookie': '_intra_42_session_production=$INTRA_SESSION'};
 
   return http.get(url, headers: header).then((data) {
