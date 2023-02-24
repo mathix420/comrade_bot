@@ -118,7 +118,7 @@ Future<dynamic> sendMessage(String message, String channel, {
 
 // GET Username from UID
 Future<dynamic> getUserFormUid(String uid) async {
-  final url = 'https://slack.com/api/users.info?token=$API_TOKEN&user=$uid';
+  final url = Uri.parse('https://slack.com/api/users.info?token=$API_TOKEN&user=$uid');
   return await http.get(url).then((response) {
     if (response != null && response.body != null) {
       return jsonDecode(response.body)['user']['name'];

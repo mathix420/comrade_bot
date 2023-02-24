@@ -22,7 +22,7 @@ Map<String, dynamic> formatMessage(String main, String sub) {
 }
 
 Future<String> queryAPI(String slug, String text) async {
-  final res = await http.get('$endpoint&langpair=$slug&q=$text',
+  final res = await http.get(Uri.parse('$endpoint&langpair=$slug&q=$text'),
   headers: {
     'x-rapidapi-key': MYMEMORY_SECRET,
     'x-rapidapi-host': 'translated-mymemory---translation-memory.p.rapidapi.com'

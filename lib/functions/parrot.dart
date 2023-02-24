@@ -9,7 +9,7 @@ Future<String> rndVideo() async {
     return 'Sorry no videos for now :sad_blob:';
   }
 
-  return http.get('https://random-ize.com/random-youtube/').then((data) {
+  return http.get(Uri.parse('https://random-ize.com/random-youtube/')).then((data) {
     final exp = RegExp(r'https://www.youtube.com/embed/[^"]*');
     Match match = exp.firstMatch(data.body);
 
